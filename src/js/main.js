@@ -1,1 +1,5 @@
-console.log('Hello!');
+import './lib/lib';
+
+$('.active').toggle();
+
+
