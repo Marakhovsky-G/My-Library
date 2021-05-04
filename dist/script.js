@@ -407,16 +407,33 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.animateOverTime = functi
   return _animateOverTime;
 };
 
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype._fadeIn = function (duration, display, fin, i) {
+  this[i].style.display = display || 'block';
+
+  const _fadeIn = complection => {
+    this[i].style.opacity = complection;
+  };
+
+  const anim = this.animateOverTime(duration, _fadeIn, fin);
+  requestAnimationFrame(anim);
+};
+
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype._fadeOut = function (duration, fin, i) {
+  const _fadeOut = complection => {
+    this[i].style.opacity = 1 - complection;
+
+    if (complection === 1) {
+      this[i].style.display = 'none';
+    }
+  };
+
+  const anim = this.animateOverTime(duration, _fadeOut, fin);
+  requestAnimationFrame(anim);
+};
+
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeIn = function (duration, display, fin) {
   for (let i = 0; i < this.length; i++) {
-    this[i].style.display = display || 'block';
-
-    const _fadeIn = complection => {
-      this[i].style.opacity = complection;
-    };
-
-    const anim = this.animateOverTime(duration, _fadeIn, fin);
-    requestAnimationFrame(anim);
+    this._fadeIn(duration, display, fin, i);
   }
 
   return this;
@@ -424,16 +441,19 @@ _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeIn = function (durat
 
 _core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeOut = function (duration, fin) {
   for (let i = 0; i < this.length; i++) {
-    const _fadeOut = complection => {
-      this[i].style.opacity = 1 - complection;
+    this._fadeOut(duration, fin, i);
+  }
 
-      if (complection === 1) {
-        this[i].style.display = 'none';
-      }
-    };
+  return this;
+};
 
-    const anim = this.animateOverTime(duration, _fadeOut, fin);
-    requestAnimationFrame(anim);
+_core__WEBPACK_IMPORTED_MODULE_0__["default"].prototype.fadeToggle = function (duration, display, fin) {
+  for (let i = 0; i < this.length; i++) {
+    if (window.getComputedStyle(this[i]).display === 'none') {
+      this._fadeIn(duration, display, fin, i);
+    } else {
+      this._fadeOut(duration, fin, i);
+    }
   }
 
   return this;
@@ -507,7 +527,7 @@ Object(_lib_lib__WEBPACK_IMPORTED_MODULE_0__["default"])('button').on('click', f
 }); // console.log($('div').eq(2).find('.more'));
 // console.log($('.some').closest('.findme').addClass('dododo'));
 // $('.findme').siblings().addClass('dododo');
-// $('.findme').fadeIn(1000);
+// $('.findme').fadeToggle(1000);
 
 /***/ })
 
