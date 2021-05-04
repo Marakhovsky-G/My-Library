@@ -10,5 +10,6 @@ $('button').on('click', function() {
 
 // $('.findme').siblings().addClass('dododo');
 
+// $('.findme').fadeIn(1000);
 
 
