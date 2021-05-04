@@ -1,5 +1,8 @@
-import './lib/lib';
+import $ from './lib/lib';
 
-$('.active').removeClass('active');
+
+$('button').on('click', function() {
+  $(this).toggleClass('active');
+});
 
 
