@@ -35,7 +35,6 @@ function esc(evt) {
   }
 }
 
-
 $.prototype.modal = function () {
   for (let i = 0; i < this.length; i++) {
     const target = this[i].getAttribute('data-target');
